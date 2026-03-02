@@ -25,6 +25,12 @@ function signUpFirstTime() {
   setTimeout(() => showQuestionnairePopup(), 300);
 }
 
+// Sign in: treat as first-time user, show questionnaire popup
+function signInFirstTime() {
+  navigateTo('screen-home');
+  setTimeout(() => showQuestionnairePopup(), 300);
+}
+
 function showQuestionnairePopup() {
   const popup = document.getElementById('questionnaire-popup');
   if (popup) {

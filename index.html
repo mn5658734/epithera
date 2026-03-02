@@ -16,7 +16,7 @@
         <h1 class="login-title">Welcome back</h1>
         <p class="login-subtitle">Sign in to sync your data</p>
         <div class="login-form">
-          <button class="btn-google" onclick="navigateTo('screen-home')">
+          <button class="btn-google" onclick="signInFirstTime()">
             <span class="google-icon">G</span> Continue with Google
           </button>
           <div class="divider">OR</div>
@@ -31,7 +31,7 @@
             <input type="password" placeholder="••••••••">
             <span class="input-icon-right">👁</span>
           </div>
-          <button class="btn-primary" onclick="navigateTo('screen-home')">Sign In →</button>
+          <button class="btn-primary" onclick="signInFirstTime()">Sign In →</button>
         </div>
         <p class="login-footer">Don't have an account? <a href="#" onclick="navigateTo('screen-signup'); return false;">Sign up</a></p>
       </div>
@@ -83,8 +83,9 @@
           </div>
           <div id="q2" class="q-block">
             <h3>Do you drink alcohol?</h3>
-            <div class="q-buttons">
+            <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('alcohol','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('alcohol','occasionally', this); nextQuestion()">Occasionally</button>
               <button class="q-btn" onclick="selectQ('alcohol','no', this); nextQuestion()">No</button>
             </div>
           </div>
@@ -395,6 +396,27 @@
             <p>Any new spots since yesterday?</p>
           </div>
           <label class="toggle"><input type="checkbox"><span></span></label>
+        </div>
+        <div class="derm-contacts-card" onclick="navigateTo('screen-dermatologist')">
+          <div class="derm-contacts-header">
+            <span class="derm-icon">👨‍⚕️</span>
+            <h4>Dermatologist Contacts</h4>
+          </div>
+          <div class="derm-contacts-list">
+            <div class="derm-contact-item">
+              <strong>Dr. Priya Sharma</strong>
+              <small>Skin & Hair Clinic • 2.3 km</small>
+            </div>
+            <div class="derm-contact-item">
+              <strong>Dr. Raj Mehta</strong>
+              <small>DermaCare • 4.1 km</small>
+            </div>
+            <div class="derm-contact-item">
+              <strong>Dr. Anjali Patel</strong>
+              <small>Skin Wellness • 5.2 km</small>
+            </div>
+          </div>
+          <span class="derm-view-all">View all & book →</span>
         </div>
         <h4>Progress Photo</h4>
         <div class="photo-upload">

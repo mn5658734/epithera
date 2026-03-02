@@ -1158,6 +1158,67 @@ body {
   color: var(--text-muted);
 }
 
+.derm-contacts-card {
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.derm-contacts-card:hover {
+  border-color: var(--orange);
+  background: var(--orange-light);
+}
+
+.derm-contacts-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.derm-icon {
+  font-size: 24px;
+}
+
+.derm-contacts-header h4 {
+  margin: 0 !important;
+  font-size: 15px;
+}
+
+.derm-contacts-list {
+  margin-bottom: 12px;
+}
+
+.derm-contact-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.derm-contact-item:last-child {
+  border-bottom: none;
+}
+
+.derm-contact-item strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.derm-contact-item small {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.derm-view-all {
+  font-size: 13px;
+  color: var(--orange);
+  font-weight: 500;
+}
+
 .toggle {
   position: relative;
   width: 50px;
