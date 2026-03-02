@@ -6,6 +6,7 @@
 // Questionnaire state
 let questionnaireAnswers = {};
 let currentQuestion = 1;
+const TOTAL_QUESTIONS = 5;
 
 function navigateTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -13,6 +14,25 @@ function navigateTo(screenId) {
   if (screen) {
     screen.classList.add('active');
   }
+}
+
+// First-time signup: go to home, then show questionnaire popup
+function signUpFirstTime() {
+  navigateTo('screen-home');
+  setTimeout(() => showQuestionnairePopup(), 300);
+}
+
+function showQuestionnairePopup() {
+  const popup = document.getElementById('questionnaire-popup');
+  if (popup) {
+    popup.classList.add('active');
+    resetQuestionnaire();
+  }
+}
+
+function closeQuestionnairePopup() {
+  const popup = document.getElementById('questionnaire-popup');
+  if (popup) popup.classList.remove('active');
 }
 
 function selectQ(key, value, el) {
@@ -26,22 +46,26 @@ function selectQ(key, value, el) {
 function nextQuestion() {
   document.querySelectorAll('.q-block').forEach(b => b.classList.remove('active'));
   currentQuestion++;
-  document.getElementById('q-step').textContent = currentQuestion;
+  const stepEl = document.getElementById('q-step');
+  if (stepEl) stepEl.textContent = currentQuestion;
   const nextBlock = document.getElementById('q' + currentQuestion);
-  if (nextBlock) {
-    nextBlock.classList.add('active');
-  }
+  if (nextBlock) nextBlock.classList.add('active');
 }
 
-function finishQuestionnaire() {
-  // Store answers (in real app would send to backend)
-  console.log('Questionnaire answers:', questionnaireAnswers);
-  navigateTo('screen-home');
+function resetQuestionnaire() {
   currentQuestion = 1;
   questionnaireAnswers = {};
   document.querySelectorAll('.q-block').forEach(b => b.classList.remove('active'));
-  document.getElementById('q1').classList.add('active');
-  document.getElementById('q-step').textContent = 1;
+  const q1 = document.getElementById('q1');
+  if (q1) q1.classList.add('active');
+  const stepEl = document.getElementById('q-step');
+  if (stepEl) stepEl.textContent = 1;
+}
+
+function finishQuestionnaire() {
+  console.log('Questionnaire answers:', questionnaireAnswers);
+  closeQuestionnairePopup();
+  resetQuestionnaire();
 }
 
 // Tab interactions for dermatologist

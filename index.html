@@ -44,7 +44,7 @@
         <h1 class="login-title">Create account</h1>
         <p class="login-subtitle">Start your skin health journey</p>
         <div class="login-form">
-          <button class="btn-google" onclick="navigateTo('screen-questionnaire')">
+          <button class="btn-google" onclick="signUpFirstTime()">
             <span class="google-icon">G</span> Continue with Google
           </button>
           <div class="divider">OR</div>
@@ -58,44 +58,52 @@
             <span class="input-icon">🔒</span>
             <input type="password" placeholder="••••••••">
           </div>
-          <button class="btn-primary" onclick="navigateTo('screen-questionnaire')">Sign Up →</button>
+          <button class="btn-primary" onclick="signUpFirstTime()">Sign Up →</button>
         </div>
         <p class="login-footer">Already have an account? <a href="#" onclick="navigateTo('screen-login'); return false;">Sign in</a></p>
       </div>
     </div>
 
-    <!-- ========== ONBOARDING QUESTIONNAIRE (NEW) ========== -->
-    <div id="screen-questionnaire" class="screen">
-      <div class="questionnaire-container">
+    <!-- ========== QUESTIONNAIRE POPUP (first-time signup) ========== -->
+    <div id="questionnaire-popup" class="modal-overlay">
+      <div class="modal-content questionnaire-modal">
         <div class="q-header">
-          <span class="q-progress">Step <span id="q-step">1</span> of 4</span>
+          <span class="q-progress">Step <span id="q-step">1</span> of 5</span>
           <h1>Tell us about yourself</h1>
           <p>This helps us personalize your skin health insights</p>
         </div>
         <div class="q-content">
           <div id="q1" class="q-block active">
+            <h3>What's your skin type?</h3>
+            <div class="q-buttons q-buttons-3">
+              <button class="q-btn" onclick="selectQ('skintype','oily', this); nextQuestion()">Oily</button>
+              <button class="q-btn" onclick="selectQ('skintype','dry', this); nextQuestion()">Dry</button>
+              <button class="q-btn" onclick="selectQ('skintype','other', this); nextQuestion()">Other</button>
+            </div>
+          </div>
+          <div id="q2" class="q-block">
             <h3>Do you drink alcohol?</h3>
             <div class="q-buttons">
               <button class="q-btn" onclick="selectQ('alcohol','yes', this); nextQuestion()">Yes</button>
               <button class="q-btn" onclick="selectQ('alcohol','no', this); nextQuestion()">No</button>
             </div>
           </div>
-          <div id="q2" class="q-block">
+          <div id="q3" class="q-block">
             <h3>Do you smoke?</h3>
             <div class="q-buttons">
               <button class="q-btn" onclick="selectQ('smoking','yes', this); nextQuestion()">Yes</button>
               <button class="q-btn" onclick="selectQ('smoking','no', this); nextQuestion()">No</button>
             </div>
           </div>
-          <div id="q3" class="q-block">
+          <div id="q4" class="q-block">
             <h3>What's your diet?</h3>
             <div class="q-buttons q-buttons-3">
-              <button class="q-btn" onclick="selectQ('diet','vegetarian'); nextQuestion()">Vegetarian</button>
-              <button class="q-btn" onclick="selectQ('diet','nonveg'); nextQuestion()">Non-Vegetarian</button>
-              <button class="q-btn" onclick="selectQ('diet','vegan'); nextQuestion()">Vegan</button>
+              <button class="q-btn" onclick="selectQ('diet','vegetarian', this); nextQuestion()">Vegetarian</button>
+              <button class="q-btn" onclick="selectQ('diet','nonveg', this); nextQuestion()">Non-Vegetarian</button>
+              <button class="q-btn" onclick="selectQ('diet','vegan', this); nextQuestion()">Vegan</button>
             </div>
           </div>
-          <div id="q4" class="q-block">
+          <div id="q5" class="q-block">
             <h3>Water drinking habits (daily)?</h3>
             <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('water','1-3', this); finishQuestionnaire()">1-3 liters</button>
