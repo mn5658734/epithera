@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epithera - Skin Health</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- ========== LOGIN SCREEN ========== -->
+    <div id="screen-login" class="screen active">
+      <div class="login-container">
+        <div class="login-logo">✨</div>
+        <h1 class="login-title">Welcome back</h1>
+        <p class="login-subtitle">Sign in to sync your data</p>
+        <div class="login-form">
+          <button class="btn-google" onclick="navigateTo('screen-home')">
+            <span class="google-icon">G</span> Continue with Google
+          </button>
+          <div class="divider">OR</div>
+          <label>Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input type="email" placeholder="you@example.com">
+          </div>
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" placeholder="••••••••">
+            <span class="input-icon-right">👁</span>
+          </div>
+          <button class="btn-primary" onclick="navigateTo('screen-home')">Sign In →</button>
+        </div>
+        <p class="login-footer">Don't have an account? <a href="#" onclick="navigateTo('screen-signup'); return false;">Sign up</a></p>
+      </div>
+    </div>
+
+    <!-- ========== SIGNUP SCREEN ========== -->
+    <div id="screen-signup" class="screen">
+      <div class="login-container">
+        <div class="login-logo">✨</div>
+        <h1 class="login-title">Create account</h1>
+        <p class="login-subtitle">Start your skin health journey</p>
+        <div class="login-form">
+          <button class="btn-google" onclick="navigateTo('screen-questionnaire')">
+            <span class="google-icon">G</span> Continue with Google
+          </button>
+          <div class="divider">OR</div>
+          <label>Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input type="email" placeholder="you@example.com">
+          </div>
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" placeholder="••••••••">
+          </div>
+          <button class="btn-primary" onclick="navigateTo('screen-questionnaire')">Sign Up →</button>
+        </div>
+        <p class="login-footer">Already have an account? <a href="#" onclick="navigateTo('screen-login'); return false;">Sign in</a></p>
+      </div>
+    </div>
+
+    <!-- ========== ONBOARDING QUESTIONNAIRE (NEW) ========== -->
+    <div id="screen-questionnaire" class="screen">
+      <div class="questionnaire-container">
+        <div class="q-header">
+          <span class="q-progress">Step <span id="q-step">1</span> of 4</span>
+          <h1>Tell us about yourself</h1>
+          <p>This helps us personalize your skin health insights</p>
+        </div>
+        <div class="q-content">
+          <div id="q1" class="q-block active">
+            <h3>Do you drink alcohol?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('alcohol','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('alcohol','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <div id="q2" class="q-block">
+            <h3>Do you smoke?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('smoking','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('smoking','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <div id="q3" class="q-block">
+            <h3>What's your diet?</h3>
+            <div class="q-buttons q-buttons-3">
+              <button class="q-btn" onclick="selectQ('diet','vegetarian'); nextQuestion()">Vegetarian</button>
+              <button class="q-btn" onclick="selectQ('diet','nonveg'); nextQuestion()">Non-Vegetarian</button>
+              <button class="q-btn" onclick="selectQ('diet','vegan'); nextQuestion()">Vegan</button>
+            </div>
+          </div>
+          <div id="q4" class="q-block">
+            <h3>Water drinking habits (daily)?</h3>
+            <div class="q-buttons q-buttons-3">
+              <button class="q-btn" onclick="selectQ('water','1-3', this); finishQuestionnaire()">1-3 liters</button>
+              <button class="q-btn" onclick="selectQ('water','3-5', this); finishQuestionnaire()">&gt;3 liters</button>
+              <button class="q-btn" onclick="selectQ('water','5+', this); finishQuestionnaire()">&gt;5 liters</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-skip" onclick="finishQuestionnaire()">Skip for now</button>
+      </div>
+    </div>
+
+    <!-- ========== HOME SCREEN ========== -->
+    <div id="screen-home" class="screen">
+      <div class="header">
+        <h1>Epithera</h1>
+        <div class="header-actions">
+          <button class="icon-btn">📅</button>
+          <button class="icon-btn">📷</button>
+          <div class="avatar">MI</div>
+        </div>
+      </div>
+      <p class="date">Tuesday, March 3 ☀️</p>
+      <h2 class="greeting">Good morning! ✨</h2>
+      <p class="greeting-sub">Ready to start your day?</p>
+      <button class="btn-checkin" onclick="navigateTo('screen-quicklog')">
+        ▶ Start Daily Check-in
+      </button>
+      <div class="progress-card">
+        <div class="progress-header">
+          <span>Today's Progress</span>
+          <span class="progress-pct">0%</span>
+        </div>
+        <p class="progress-detail">0 of 14 habits completed</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      </div>
+      <div class="card-row">
+        <div class="card card-habits" onclick="navigateTo('screen-habits')">
+          <h4>Log Habits</h4>
+          <p>14 habits to track</p>
+        </div>
+        <div class="card card-skin" onclick="navigateTo('screen-skinjournal')">
+          <h4>Skin Journal</h4>
+          <p>Not logged yet</p>
+        </div>
+      </div>
+      <div class="skin-checkin-card" onclick="navigateTo('screen-health')">
+        <span class="heart-icon">❤️</span>
+        <h4>How's your skin today?</h4>
+        <p>Take a moment to check in with your skin</p>
+        <button class="btn-log">Log Now</button>
+      </div>
+      <!-- NEW: AI Insights Section -->
+      <div class="insights-card" onclick="navigateTo('screen-insights')">
+        <div class="insights-header">
+          <span>💡</span>
+          <span>SKIN TIP OF THE DAY</span>
+          <span>💪</span>
+        </div>
+        <p>Getting 7-8 hours of sleep helps your skin repair and regenerate overnight.</p>
+        <span class="insights-link">View personalized insights →</span>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item active" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== QUICK LOG (Daily Check-in Step 1) ========== -->
+    <div id="screen-quicklog" class="screen">
+      <div class="checkin-header">
+        <h2>Daily Check-in</h2>
+        <span>Step 1 of 3</span>
+      </div>
+      <div class="checkin-tabs">
+        <span class="tab active">Habits</span>
+        <span class="tab">Food</span>
+        <span class="tab">Health</span>
+      </div>
+      <div class="quicklog-content">
+        <p class="quicklog-label">Quick Log <span>1 of 13</span></p>
+        <div class="quicklog-card">
+          <span class="habit-icon">💧</span>
+          <h3>Face Wash</h3>
+          <p>Swipe right to complete, left to skip</p>
+          <div class="quicklog-buttons">
+            <button class="btn-skip-q">✕ Skip</button>
+            <button class="btn-done" onclick="navigateTo('screen-habits-log')">Done ✓</button>
+          </div>
+        </div>
+        <a class="exit-link" onclick="navigateTo('screen-home')">Exit Quick Mode</a>
+      </div>
+    </div>
+
+    <!-- ========== HABITS LOG (with Movement + Outdoor Sports) ========== -->
+    <div id="screen-habits-log" class="screen">
+      <div class="checkin-header">
+        <h2>Daily Check-in</h2>
+        <span>Step 1 of 3</span>
+      </div>
+      <div class="checkin-tabs">
+        <span class="tab active">Habits</span>
+        <span class="tab" onclick="navigateTo('screen-food-log')">Food</span>
+        <span class="tab">Health</span>
+      </div>
+      <div class="habits-content">
+        <div class="habit-section">
+          <h4>EVENING SKINCARE 🌙</h4>
+          <div class="swipe-bar">
+            <button class="swipe-skip">← Skip</button>
+            <span>Swipe</span>
+            <button class="swipe-done">Done →</button>
+          </div>
+          <div class="habit-buttons">
+            <button class="habit-btn">💧 Micellar Water</button>
+            <button class="habit-btn">💧 Face Wash</button>
+            <button class="habit-btn">🎯 Spot Treatment</button>
+            <button class="habit-btn">✨ Moisturizer</button>
+          </div>
+        </div>
+        <div class="habit-section">
+          <h4>MOVEMENT</h4>
+          <div class="swipe-bar">
+            <button class="swipe-skip">← Skip</button>
+            <span>Swipe</span>
+            <button class="swipe-done">Done →</button>
+          </div>
+          <div class="habit-buttons">
+            <button class="habit-btn">🏃 Exercise</button>
+            <button class="habit-btn">👣 Walk</button>
+            <!-- NEW: Outdoor Sports -->
+            <button class="habit-btn" onclick="navigateTo('screen-outdoor-sports')">🏏 Outdoor Sports</button>
+          </div>
+        </div>
+        <div class="habit-section">
+          <h4>HYGIENE</h4>
+          <div class="swipe-bar">
+            <button class="swipe-skip">← Skip</button>
+            <span>Swipe</span>
+            <button class="swipe-done">Done →</button>
+          </div>
+          <div class="habit-buttons">
+            <button class="habit-btn">🛏️ Changed pillowcase</button>
+            <button class="habit-btn">📱 Cleaned phone</button>
+            <button class="habit-btn">🧺 Fresh towel</button>
+            <button class="habit-btn">👓 Cleaned spectacles</button>
+          </div>
+        </div>
+        <button class="btn-continue" onclick="navigateTo('screen-food-log')">Continue to Food Log</button>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item active">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== OUTDOOR SPORTS (NEW) ========== -->
+    <div id="screen-outdoor-sports" class="screen">
+      <div class="page-header">
+        <button class="back-btn" onclick="navigateTo('screen-habits-log')">←</button>
+        <h2>Outdoor Sports</h2>
+      </div>
+      <div class="sports-content">
+        <div class="sport-category">
+          <h4>🏏 Ball Sports</h4>
+          <div class="sport-buttons">
+            <button class="sport-btn">Cricket</button>
+            <button class="sport-btn">Basketball</button>
+            <button class="sport-btn">Football</button>
+            <button class="sport-btn">Tennis</button>
+          </div>
+        </div>
+        <div class="sport-category">
+          <h4>🏊 Water Sports</h4>
+          <div class="sport-buttons">
+            <button class="sport-btn">Swimming</button>
+            <button class="sport-btn">Surfing</button>
+            <button class="sport-btn">Kayaking</button>
+            <button class="sport-btn">Water Polo</button>
+          </div>
+        </div>
+        <button class="btn-continue" onclick="navigateTo('screen-habits-log')">Back to Habits</button>
+      </div>
+    </div>
+
+    <!-- ========== FOOD LOG ========== -->
+    <div id="screen-food-log" class="screen">
+      <div class="checkin-header">
+        <h2>Daily Check-in</h2>
+        <span>Step 2 of 3</span>
+      </div>
+      <div class="checkin-tabs">
+        <span class="tab" onclick="navigateTo('screen-habits-log')">Habits</span>
+        <span class="tab active">Food</span>
+        <span class="tab" onclick="navigateTo('screen-health-log')">Health</span>
+      </div>
+      <div class="food-content">
+        <h3>Food Log</h3>
+        <p class="food-date">Tuesday, March 3</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for food (e.g., dal, pizza, idli)">
+        </div>
+        <h4>Today's Food</h4>
+        <div class="food-list">
+          <div class="food-item">
+            <span>😊</span>
+            <div>
+              <strong>curd rice</strong>
+              <small>Snack • 1 serving</small>
+            </div>
+            <button class="food-remove">✕</button>
+          </div>
+          <div class="food-item">
+            <span>😊</span>
+            <div>
+              <strong>4x Veg Cheese Pizza</strong>
+              <small>Snack • 1 slice</small>
+            </div>
+            <button class="food-remove">✕</button>
+          </div>
+          <div class="food-item">
+            <span>🍲</span>
+            <div>
+              <strong>Veg Biryani</strong>
+              <small>Dinner • 150g</small>
+            </div>
+            <button class="food-remove">✕</button>
+          </div>
+        </div>
+        <button class="btn-continue" onclick="navigateTo('screen-health-log')">Continue to Health Log</button>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item active">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== HEALTH LOG ========== -->
+    <div id="screen-health-log" class="screen">
+      <div class="checkin-header">
+        <h2>Daily Check-in</h2>
+        <span>Step 3 of 3</span>
+      </div>
+      <div class="checkin-tabs">
+        <span class="tab" onclick="navigateTo('screen-habits-log')">Habits</span>
+        <span class="tab" onclick="navigateTo('screen-food-log')">Food</span>
+        <span class="tab active">Health</span>
+      </div>
+      <div class="health-content">
+        <h3>Health Check-in</h3>
+        <p class="health-date">Tuesday, March 3</p>
+        <div class="health-guidance">
+          <span>❤️</span>
+          <p>Take a gentle moment to check in with your skin and body. No judgment, just observation.</p>
+          <span>🕐</span>
+        </div>
+        <h4>How does your skin feel today?</h4>
+        <div class="skin-feel-buttons">
+          <button class="skin-btn">😊 Clear</button>
+          <button class="skin-btn">😢 Bumpy</button>
+          <button class="skin-btn">😬 Inflamed</button>
+          <button class="skin-btn">😣 Painful</button>
+        </div>
+        <h4>Oiliness Level 💧</h4>
+        <div class="slider-wrap">
+          <span>🌵 Dry</span>
+          <input type="range" min="0" max="100" value="50">
+          <span>💧 Oily</span>
+        </div>
+        <p class="slider-label">Balanced</p>
+        <h4>Gut Health 🌿</h4>
+        <div class="slider-wrap">
+          <span>😣 Upset</span>
+          <input type="range" min="0" max="100" value="80">
+          <span>😊 Great</span>
+        </div>
+        <div class="breakout-row">
+          <div>
+            <h4>New breakouts? ⚠️</h4>
+            <p>Any new spots since yesterday?</p>
+          </div>
+          <label class="toggle"><input type="checkbox"><span></span></label>
+        </div>
+        <h4>Progress Photo</h4>
+        <div class="photo-upload">
+          <span>📷</span>
+          <p>Capture your skin, Track your progress visually</p>
+          <button class="btn-add-photo">Add Photo</button>
+        </div>
+        <label>Notes (optional)</label>
+        <textarea placeholder="Anything new in your routine today? Any observation about your skin or overall health today? Mention the location of any new pimples."></textarea>
+        <button class="btn-complete" onclick="navigateTo('screen-home')">📄 Complete Check-in 🎉</button>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item active">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== HABITS MAIN ========== -->
+    <div id="screen-habits" class="screen">
+      <div class="habits-header">
+        <div>
+          <h1>Habits</h1>
+          <p>Tuesday, March 3</p>
+        </div>
+        <div class="habits-actions">
+          <button class="icon-btn orange">▶</button>
+          <button class="icon-btn">⚙</button>
+          <button class="icon-btn orange">+</button>
+        </div>
+      </div>
+      <div class="habits-main-content">
+        <p>Tap the play button above to start Daily Check-in</p>
+        <button class="btn-checkin" onclick="navigateTo('screen-quicklog')">Start Daily Check-in</button>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item active">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== FOOD MAIN ========== -->
+    <div id="screen-food" class="screen">
+      <div class="habits-header">
+        <div>
+          <h1>Food</h1>
+          <p>Tuesday, March 3</p>
+        </div>
+      </div>
+      <div class="food-main-content">
+        <div class="search-bar">
+          <input type="text" placeholder="Search for food (e.g., dal, pizza, idli)">
+        </div>
+        <h4>Today's Food</h4>
+        <p class="empty-state">No food logged yet. Add your meals to track.</p>
+        <button class="btn-checkin" onclick="navigateTo('screen-food-log')">Log Food</button>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item active">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== DERMATOLOGIST (NEW) ========== -->
+    <div id="screen-dermatologist" class="screen">
+      <div class="derm-header">
+        <h1>Health</h1>
+        <p>Dermatologist & Consultations</p>
+      </div>
+      <div class="derm-tabs">
+        <button class="derm-tab active">Nearby</button>
+        <button class="derm-tab">Online</button>
+      </div>
+      <div class="derm-content">
+        <div class="search-bar">
+          <input type="text" placeholder="Search dermatologists near you">
+        </div>
+        <h4>Nearby Dermatologists</h4>
+        <div class="doctor-list">
+          <div class="doctor-card">
+            <div class="doctor-avatar">DR</div>
+            <div class="doctor-info">
+              <strong>Dr. Priya Sharma</strong>
+              <small>Skin & Hair Clinic • 2.3 km</small>
+              <span class="rating">⭐ 4.8</span>
+            </div>
+            <button class="btn-book">Book</button>
+          </div>
+          <div class="doctor-card">
+            <div class="doctor-avatar">DR</div>
+            <div class="doctor-info">
+              <strong>Dr. Raj Mehta</strong>
+              <small>DermaCare • 4.1 km</small>
+              <span class="rating">⭐ 4.9</span>
+            </div>
+            <button class="btn-book">Book</button>
+          </div>
+          <div class="doctor-card">
+            <div class="doctor-avatar">DR</div>
+            <div class="doctor-info">
+              <strong>Dr. Anjali Patel</strong>
+              <small>Skin Wellness • 5.2 km</small>
+              <span class="rating">⭐ 4.7</span>
+            </div>
+            <button class="btn-book">Book</button>
+          </div>
+        </div>
+        <div class="online-consult">
+          <h4>Online Consultation</h4>
+          <p>Video consult with certified dermatologists from home</p>
+          <button class="btn-primary">Book Online Consult</button>
+        </div>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item active">❤️ Health</a>
+        <a class="nav-item" onclick="navigateTo('screen-settings')">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== PERSONALIZED INSIGHTS (NEW) ========== -->
+    <div id="screen-insights" class="screen">
+      <div class="page-header">
+        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+        <h2>Personalized Insights</h2>
+      </div>
+      <div class="insights-content">
+        <div class="insight-card ai">
+          <div class="insight-badge">AI Tip</div>
+          <h4>Based on your yesterday's logs</h4>
+          <p>You had less water (1.2L) and skipped evening skincare. Today, try to hit 2L+ and complete your routine — your skin will thank you!</p>
+        </div>
+        <div class="insight-card">
+          <h4>Skin Tip of the Day</h4>
+          <p>Getting 7-8 hours of sleep helps your skin repair and regenerate overnight.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Movement insight</h4>
+          <p>You logged a walk yesterday. Outdoor activity helps circulation — great for skin glow! Consider adding 15 min today.</p>
+        </div>
+        <div class="insight-card">
+          <h4>Diet & Skin</h4>
+          <p>Your food log shows good variety. Omega-3 rich foods (fish, walnuts) can help reduce inflammation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SETTINGS (with Fitness Devices) ========== -->
+    <div id="screen-settings" class="screen">
+      <div class="settings-header">
+        <h1>Settings</h1>
+      </div>
+      <div class="settings-content">
+        <div class="settings-section">
+          <h4>Account</h4>
+          <button class="settings-item">Profile</button>
+          <button class="settings-item">Notifications</button>
+        </div>
+        <div class="settings-section">
+          <h4>Connect Devices</h4>
+          <p class="settings-desc">Sync sleep and health data for better insights</p>
+          <div class="device-list">
+            <div class="device-item">
+              <span>⌚</span>
+              <div>
+                <strong>Apple Watch</strong>
+                <small>Sleep, heart rate, activity</small>
+              </div>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="device-item">
+              <span>⌚</span>
+              <div>
+                <strong>Fitbit</strong>
+                <small>Sleep, steps, heart rate</small>
+              </div>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="device-item">
+              <span>⌚</span>
+              <div>
+                <strong>Garmin</strong>
+                <small>Sleep, activity, stress</small>
+              </div>
+              <button class="btn-connect">Connect</button>
+            </div>
+            <div class="device-item">
+              <span>📱</span>
+              <div>
+                <strong>Google Fit</strong>
+                <small>Steps, activity</small>
+              </div>
+              <button class="btn-connect">Connect</button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h4>Other</h4>
+          <button class="settings-item">Privacy</button>
+          <button class="settings-item">Help</button>
+        </div>
+      </div>
+      <nav class="bottom-nav">
+        <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
+        <a class="nav-item" onclick="navigateTo('screen-habits')">✓ Habits</a>
+        <a class="nav-item" onclick="navigateTo('screen-food')">🍴 Food</a>
+        <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
+        <a class="nav-item active">⚙️ Settings</a>
+      </nav>
+    </div>
+
+    <!-- ========== SKIN JOURNAL ========== -->
+    <div id="screen-skinjournal" class="screen">
+      <div class="page-header">
+        <button class="back-btn" onclick="navigateTo('screen-home')">←</button>
+        <h2>Skin Journal</h2>
+      </div>
+      <div class="skin-journal-content">
+        <p>Log your skin condition, photos, and observations over time.</p>
+        <button class="btn-log">Log Skin Entry</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
