@@ -8,6 +8,11 @@ let questionnaireAnswers = {};
 let currentQuestion = 1;
 const TOTAL_QUESTIONS = 5;
 
+// AI Score - stores profile from questionnaire for score calculation
+let userProfile = {};
+let selfieCount = 0;
+let currentSelfieSlot = 0;
+
 function navigateTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const screen = document.getElementById(screenId);
@@ -72,9 +77,55 @@ function resetQuestionnaire() {
 }
 
 function finishQuestionnaire() {
-  console.log('Questionnaire answers:', questionnaireAnswers);
+  userProfile = { ...questionnaireAnswers };
+  console.log('User profile saved:', userProfile);
   closeQuestionnairePopup();
   resetQuestionnaire();
+}
+
+// AI Skin Health Score
+function triggerSelfie(slot) {
+  currentSelfieSlot = slot;
+  document.getElementById('selfie-input').click();
+}
+
+function handleSelfieSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const slot = document.getElementById('selfie-' + currentSelfieSlot);
+  const placeholder = slot.querySelector('.selfie-placeholder');
+  const reader = new FileReader();
+  reader.onload = () => {
+    placeholder.style.backgroundImage = 'url(' + reader.result + ')';
+    placeholder.classList.add('filled');
+    slot.dataset.filled = '1';
+    updateSelfieCount();
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+function updateSelfieCount() {
+  selfieCount = document.querySelectorAll('.selfie-slot[data-filled="1"]').length;
+  const btn = document.getElementById('btn-get-score');
+  if (btn) btn.disabled = selfieCount < 3;
+}
+
+function calculateAIScore() {
+  if (selfieCount < 3) return;
+  // Mock score: onboarding + selfies + water + habits (prototype)
+  let base = 60;
+  if (userProfile.water === '5+') base += 8;
+  else if (userProfile.water === '3-5') base += 5;
+  if (userProfile.smoking === 'no') base += 6;
+  if (userProfile.alcohol === 'no' || userProfile.alcohol === 'occasionally') base += 4;
+  if (userProfile.diet === 'vegetarian' || userProfile.diet === 'vegan') base += 4;
+  if (typeof waterGlasses !== 'undefined' && waterGlasses >= 6) base += 5;
+  base += 10; // 3 selfies provided
+  const score = Math.min(98, Math.max(55, Math.round(base + Math.random() * 8)));
+  document.getElementById('ai-score-value').textContent = score;
+  document.getElementById('ai-score-hint').textContent = 'Based on selfies, profile, water & habits';
+  document.getElementById('btn-get-score').textContent = 'Refresh Score';
 }
 
 // Tab interactions for dermatologist

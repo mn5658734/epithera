@@ -414,6 +414,128 @@ body {
   gap: 10px;
 }
 
+/* ========== AI SKIN HEALTH SCORE ========== */
+.ai-score-card {
+  background: linear-gradient(135deg, #e8f0f8 0%, #f0e8f8 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.ai-score-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ai-score-icon {
+  font-size: 20px;
+}
+
+.ai-score-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ai-score-display {
+  margin-bottom: 8px;
+}
+
+.ai-score-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--orange);
+}
+
+.ai-score-max {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.ai-score-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.selfie-capture {
+  margin-top: 16px;
+}
+
+.selfie-slots {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.selfie-slot {
+  flex: 1;
+  aspect-ratio: 1;
+  background: var(--white);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.selfie-slot:hover {
+  border-color: var(--orange);
+  background: var(--orange-light);
+}
+
+.selfie-placeholder {
+  font-size: 28px;
+  margin-bottom: 4px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.selfie-placeholder.filled {
+  font-size: 0;
+}
+
+.selfie-slot small {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.selfie-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.btn-get-score {
+  width: 100%;
+  padding: 12px;
+  background: var(--orange);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-get-score:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
 .progress-card {
   background: var(--bg-card);
   border-radius: var(--radius);
