@@ -12,6 +12,15 @@ const TOTAL_QUESTIONS = 5;
 let userProfile = {};
 let selfieCount = 0;
 let currentSelfieSlot = 0;
+let aiScoreExpanded = false;
+
+function toggleAIScore() {
+  aiScoreExpanded = !aiScoreExpanded;
+  const content = document.getElementById('ai-score-content');
+  const dropdown = document.getElementById('ai-score-dropdown');
+  if (content) content.classList.toggle('expanded', aiScoreExpanded);
+  if (dropdown) dropdown.textContent = aiScoreExpanded ? '▲' : '▼';
+}
 
 function navigateTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));

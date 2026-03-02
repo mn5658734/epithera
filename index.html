@@ -129,32 +129,37 @@
       </div>
       <!-- AI Skin Health Score -->
       <div class="ai-score-card">
-        <div class="ai-score-header">
-          <span class="ai-score-icon">✨</span>
-          <h3>AI Skin Health Score</h3>
-        </div>
-        <div class="ai-score-display">
-          <span class="ai-score-value" id="ai-score-value">--</span>
-          <span class="ai-score-max">/ 100</span>
-        </div>
-        <p class="ai-score-hint" id="ai-score-hint">Add 3 selfies to get your score</p>
-        <div class="selfie-capture">
-          <div class="selfie-slots">
-            <div class="selfie-slot" id="selfie-1" onclick="triggerSelfie(1)">
-              <span class="selfie-placeholder">📷</span>
-              <small>Selfie 1</small>
-            </div>
-            <div class="selfie-slot" id="selfie-2" onclick="triggerSelfie(2)">
-              <span class="selfie-placeholder">📷</span>
-              <small>Selfie 2</small>
-            </div>
-            <div class="selfie-slot" id="selfie-3" onclick="triggerSelfie(3)">
-              <span class="selfie-placeholder">📷</span>
-              <small>Selfie 3</small>
-            </div>
+        <div class="ai-score-header" onclick="toggleAIScore()">
+          <div class="ai-score-title">
+            <span class="ai-score-icon">✨</span>
+            <h3>AI Skin Health Score</h3>
           </div>
-          <p class="selfie-note">Same lighting, front-facing. Used with onboarding & habits for AI analysis.</p>
-          <button class="btn-get-score" id="btn-get-score" onclick="calculateAIScore()" disabled>Get AI Score</button>
+          <span class="ai-score-dropdown" id="ai-score-dropdown">▼</span>
+        </div>
+        <div class="ai-score-content" id="ai-score-content">
+          <div class="ai-score-display">
+            <span class="ai-score-value" id="ai-score-value">--</span>
+            <span class="ai-score-max">/ 100</span>
+          </div>
+          <p class="ai-score-hint" id="ai-score-hint">Add 3 selfies to get your score</p>
+          <div class="selfie-capture">
+            <div class="selfie-slots">
+              <div class="selfie-slot" id="selfie-1" onclick="triggerSelfie(1)">
+                <span class="selfie-placeholder">📷</span>
+                <small>Selfie 1</small>
+              </div>
+              <div class="selfie-slot" id="selfie-2" onclick="triggerSelfie(2)">
+                <span class="selfie-placeholder">📷</span>
+                <small>Selfie 2</small>
+              </div>
+              <div class="selfie-slot" id="selfie-3" onclick="triggerSelfie(3)">
+                <span class="selfie-placeholder">📷</span>
+                <small>Selfie 3</small>
+              </div>
+            </div>
+            <p class="selfie-note">Same lighting, front-facing. Used with onboarding & habits for AI analysis.</p>
+            <button class="btn-get-score" id="btn-get-score" onclick="calculateAIScore()" disabled>Get AI Score</button>
+          </div>
         </div>
       </div>
       <p class="date">Tuesday, March 3 ☀️</p>
