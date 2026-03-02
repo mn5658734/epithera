@@ -151,15 +151,36 @@
           <p>Not logged yet</p>
         </div>
         <div class="card card-products" onclick="navigateTo('screen-products')">
-          <h4>My Products</h4>
+          <h4>Daily routine skin products</h4>
           <p>Creams, ointments & more</p>
         </div>
       </div>
-      <div class="skin-checkin-card" onclick="navigateTo('screen-health')">
-        <span class="heart-icon">❤️</span>
-        <h4>How's your skin today?</h4>
-        <p>Take a moment to check in with your skin</p>
-        <button class="btn-log">Log Now</button>
+      <div class="epithera-carousel">
+        <div class="carousel-header">EPITHERA Products</div>
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <div class="ad-card">
+              <span class="ad-badge">EPITHERA</span>
+              <h4>Vitamin C Serum</h4>
+              <p>Brighten & protect your skin</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="ad-card">
+              <span class="ad-badge">EPITHERA</span>
+              <h4>Hydrating Moisturizer</h4>
+              <p>24h moisture lock</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="ad-card">
+              <span class="ad-badge">EPITHERA</span>
+              <h4>Gentle Cleanser</h4>
+              <p>For all skin types</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
       </div>
       <!-- NEW: AI Insights Section -->
       <div class="insights-card" onclick="navigateTo('screen-insights')">

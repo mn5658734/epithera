@@ -189,3 +189,24 @@ document.querySelectorAll('.btn-connect').forEach(btn => {
     this.style.borderColor = wasConnect ? 'var(--green-soft)' : '';
   });
 });
+
+// EPITHERA carousel dots
+function initCarousel() {
+  const track = document.getElementById('carousel-track');
+  const dotsEl = document.getElementById('carousel-dots');
+  if (!track || !dotsEl) return;
+  const slides = track.querySelectorAll('.carousel-slide');
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      track.scrollTo({ left: track.offsetWidth * i * 0.85, behavior: 'smooth' });
+    };
+    dotsEl.appendChild(dot);
+  });
+  track.addEventListener('scroll', () => {
+    const idx = Math.round(track.scrollLeft / (track.offsetWidth * 0.85));
+    dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  });
+}
+document.addEventListener('DOMContentLoaded', initCarousel);
