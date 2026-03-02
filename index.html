@@ -129,7 +129,7 @@
       <p class="date">Tuesday, March 3 ☀️</p>
       <h2 class="greeting">Good morning! ✨</h2>
       <p class="greeting-sub">Ready to start your day?</p>
-      <button class="btn-checkin" onclick="navigateTo('screen-quicklog')">
+      <button class="btn-checkin" onclick="navigateTo('screen-habits-log')">
         ▶ Start Daily Check-in
       </button>
       <div class="progress-card">
@@ -148,6 +148,10 @@
         <div class="card card-skin" onclick="navigateTo('screen-skinjournal')">
           <h4>Skin Journal</h4>
           <p>Not logged yet</p>
+        </div>
+        <div class="card card-products" onclick="navigateTo('screen-products')">
+          <h4>My Products</h4>
+          <p>Creams, ointments & more</p>
         </div>
       </div>
       <div class="skin-checkin-card" onclick="navigateTo('screen-health')">
@@ -175,32 +179,6 @@
       </nav>
     </div>
 
-    <!-- ========== QUICK LOG (Daily Check-in Step 1) ========== -->
-    <div id="screen-quicklog" class="screen">
-      <div class="checkin-header">
-        <h2>Daily Check-in</h2>
-        <span>Step 1 of 3</span>
-      </div>
-      <div class="checkin-tabs">
-        <span class="tab active">Habits</span>
-        <span class="tab">Food</span>
-        <span class="tab">Health</span>
-      </div>
-      <div class="quicklog-content">
-        <p class="quicklog-label">Quick Log <span>1 of 13</span></p>
-        <div class="quicklog-card">
-          <span class="habit-icon">💧</span>
-          <h3>Face Wash</h3>
-          <p>Swipe right to complete, left to skip</p>
-          <div class="quicklog-buttons">
-            <button class="btn-skip-q">✕ Skip</button>
-            <button class="btn-done" onclick="navigateTo('screen-habits-log')">Done ✓</button>
-          </div>
-        </div>
-        <a class="exit-link" onclick="navigateTo('screen-home')">Exit Quick Mode</a>
-      </div>
-    </div>
-
     <!-- ========== HABITS LOG (with Movement + Outdoor Sports) ========== -->
     <div id="screen-habits-log" class="screen">
       <div class="checkin-header">
@@ -213,6 +191,28 @@
         <span class="tab">Health</span>
       </div>
       <div class="habits-content">
+        <div class="water-tracker-card">
+          <div class="water-tracker-visual">
+            <div class="water-glass">
+              <div class="water-fill" id="water-fill"></div>
+              <span class="water-drop">💧</span>
+            </div>
+            <div class="water-tracker-info">
+              <span class="water-count" id="water-count">0 / 8</span>
+              <span class="water-label">glasses of water</span>
+              <p class="water-message" id="water-message">Stay hydrated! 💪</p>
+              <div class="water-buttons">
+                <button class="water-btn-minus" onclick="updateWater(-1)">−</button>
+                <button class="water-btn-add" onclick="updateWater(1)">
+                  <span>+</span> Add Glass
+                </button>
+              </div>
+              <div class="water-progress-bar">
+                <div class="water-progress-fill" id="water-progress-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="habit-section">
           <h4>EVENING SKINCARE 🌙</h4>
           <div class="swipe-bar">
@@ -430,7 +430,7 @@
       </div>
       <div class="habits-main-content">
         <p>Tap the play button above to start Daily Check-in</p>
-        <button class="btn-checkin" onclick="navigateTo('screen-quicklog')">Start Daily Check-in</button>
+        <button class="btn-checkin" onclick="navigateTo('screen-habits-log')">Start Daily Check-in</button>
       </div>
       <nav class="bottom-nav">
         <a class="nav-item" onclick="navigateTo('screen-home')">🏠 Home</a>
@@ -549,6 +549,10 @@
           <h4>Diet & Skin</h4>
           <p>Your food log shows good variety. Omega-3 rich foods (fish, walnuts) can help reduce inflammation.</p>
         </div>
+        <div class="insight-card">
+          <h4>Your Products & Routine</h4>
+          <p>Insights are personalized using your skincare products, habits, health logs and progress images. Add your creams and ointments in Settings → My Skincare Products for better recommendations.</p>
+        </div>
       </div>
     </div>
 
@@ -562,6 +566,11 @@
           <h4>Account</h4>
           <button class="settings-item">Profile</button>
           <button class="settings-item">Notifications</button>
+        </div>
+        <div class="settings-section">
+          <h4>Skincare</h4>
+          <button class="settings-item" onclick="navigateTo('screen-products')">🧴 My Skincare Products</button>
+          <p class="settings-desc">Add creams, ointments & products for personalized tracking and insights</p>
         </div>
         <div class="settings-section">
           <h4>Connect Devices</h4>
@@ -614,6 +623,44 @@
         <a class="nav-item" onclick="navigateTo('screen-dermatologist')">❤️ Health</a>
         <a class="nav-item active">⚙️ Settings</a>
       </nav>
+    </div>
+
+    <!-- ========== MY SKINCARE PRODUCTS ========== -->
+    <div id="screen-products" class="screen">
+      <div class="page-header">
+        <button class="back-btn" onclick="navigateTo('screen-settings')">←</button>
+        <h2>My Skincare Products</h2>
+      </div>
+      <div class="products-content">
+        <p class="products-intro">Add your creams, ointments and products. We'll use this with your habits, health logs and images to generate personalized insights.</p>
+        <button class="btn-add-product" onclick="showAddProductForm()">+ Add Product</button>
+        <div id="products-list" class="products-list"></div>
+      </div>
+      <!-- Add Product Form (hidden by default) -->
+      <div id="add-product-form" class="add-product-form">
+        <h4>Add Product</h4>
+        <label>Product name</label>
+        <input type="text" id="product-name" placeholder="e.g. Vitamin C Serum">
+        <label>Type</label>
+        <select id="product-type">
+          <option value="cream">Cream</option>
+          <option value="ointment">Ointment</option>
+          <option value="serum">Serum</option>
+          <option value="moisturizer">Moisturizer</option>
+          <option value="sunscreen">Sunscreen</option>
+          <option value="cleanser">Cleanser</option>
+          <option value="toner">Toner</option>
+          <option value="treatment">Treatment</option>
+          <option value="oil">Oil</option>
+          <option value="other">Other</option>
+        </select>
+        <label>Brand (optional)</label>
+        <input type="text" id="product-brand" placeholder="e.g. Cetaphil">
+        <div class="form-buttons">
+          <button class="btn-cancel" onclick="hideAddProductForm()">Cancel</button>
+          <button class="btn-primary" onclick="addProduct()">Add</button>
+        </div>
+      </div>
     </div>
 
     <!-- ========== SKIN JOURNAL ========== -->

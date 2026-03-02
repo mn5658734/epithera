@@ -7,8 +7,7 @@ A full UI clickable prototype for the Epithera skin health tracking application.
 ### Original Flow (Preserved)
 - **Login / Sign up** — Welcome back screen with Google & email auth
 - **Home** — Daily greeting, progress, Log Habits, Skin Journal, skin check-in prompt
-- **Daily Check-in** — 3-step flow: Habits → Food → Health
-- **Quick Log** — Swipe-style habit logging (Face Wash, etc.)
+- **Daily Check-in** — 3-step flow: Habits → Food → Health (full view)
 - **Habits** — Evening Skincare, Movement, Hygiene with swipe actions
 - **Food Log** — Search & log food items
 - **Health Check-in** — Skin feel, oiliness, gut health, breakouts, progress photo
@@ -47,7 +46,7 @@ A full UI clickable prototype for the Epithera skin health tracking application.
 ## Demo Flow
 
 1. **Sign up** → Questionnaire (4 questions) → Home
-2. **Start Daily Check-in** → Quick Log → Habits (with Outdoor Sports) → Food → Health → Complete
+2. **Start Daily Check-in** → Habits (with Outdoor Sports) → Food → Health → Complete
 3. **Health tab** → Dermatologist search & book
 4. **Settings** → Connect fitness devices
 5. **Home** → "View personalized insights" → AI tips
