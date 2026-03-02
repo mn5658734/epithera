@@ -584,12 +584,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  font-size: 11px;
+  gap: 2px;
+  font-size: 10px;
   color: var(--text-muted);
   text-decoration: none;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px 4px;
   border-radius: var(--radius-sm);
 }
 
