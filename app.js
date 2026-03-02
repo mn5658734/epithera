@@ -5,8 +5,8 @@
 
 // Questionnaire state
 let questionnaireAnswers = {};
-let currentQuestion = 1;
-const TOTAL_QUESTIONS = 5;
+const QUESTION_ORDER = ['q-gender', 'q-hormone', 'q-pcos', 'q-pcod', 'q-period', 'q-skintype', 'q-alcohol', 'q-smoking', 'q-diet', 'q-water'];
+let currentQuestionIndex = 0;
 
 // AI Score - stores profile from questionnaire for score calculation
 let userProfile = {};
@@ -66,23 +66,41 @@ function selectQ(key, value, el) {
   }
 }
 
+function getVisibleQuestions() {
+  const gender = questionnaireAnswers.gender;
+  if (gender === 'female') {
+    return ['q-gender', 'q-hormone', 'q-pcos', 'q-pcod', 'q-period', 'q-skintype', 'q-alcohol', 'q-smoking', 'q-diet', 'q-water'];
+  }
+  return ['q-gender', 'q-skintype', 'q-alcohol', 'q-smoking', 'q-diet', 'q-water'];
+}
+
 function nextQuestion() {
+  const visible = getVisibleQuestions();
+  currentQuestionIndex++;
+  if (currentQuestionIndex >= visible.length) {
+    finishQuestionnaire();
+    return;
+  }
   document.querySelectorAll('.q-block').forEach(b => b.classList.remove('active'));
-  currentQuestion++;
-  const stepEl = document.getElementById('q-step');
-  if (stepEl) stepEl.textContent = currentQuestion;
-  const nextBlock = document.getElementById('q' + currentQuestion);
+  const nextId = visible[currentQuestionIndex];
+  const nextBlock = document.getElementById(nextId);
   if (nextBlock) nextBlock.classList.add('active');
+  const stepEl = document.getElementById('q-step');
+  const totalEl = document.getElementById('q-total');
+  if (stepEl) stepEl.textContent = currentQuestionIndex + 1;
+  if (totalEl) totalEl.textContent = visible.length;
 }
 
 function resetQuestionnaire() {
-  currentQuestion = 1;
+  currentQuestionIndex = 0;
   questionnaireAnswers = {};
   document.querySelectorAll('.q-block').forEach(b => b.classList.remove('active'));
-  const q1 = document.getElementById('q1');
-  if (q1) q1.classList.add('active');
+  const qGender = document.getElementById('q-gender');
+  if (qGender) qGender.classList.add('active');
   const stepEl = document.getElementById('q-step');
+  const totalEl = document.getElementById('q-total');
   if (stepEl) stepEl.textContent = 1;
+  if (totalEl) totalEl.textContent = '6';
 }
 
 function finishQuestionnaire() {

@@ -68,12 +68,54 @@
     <div id="questionnaire-popup" class="modal-overlay">
       <div class="modal-content questionnaire-modal">
         <div class="q-header">
-          <span class="q-progress">Step <span id="q-step">1</span> of 5</span>
+          <span class="q-progress">Step <span id="q-step">1</span> of <span id="q-total">9</span></span>
           <h1>Tell us about yourself</h1>
           <p>This helps us personalize your skin health insights</p>
         </div>
         <div class="q-content">
-          <div id="q1" class="q-block active">
+          <!-- Q1: Gender -->
+          <div id="q-gender" class="q-block active">
+            <h3>What's your gender?</h3>
+            <div class="q-buttons q-buttons-3">
+              <button class="q-btn" onclick="selectQ('gender','male', this); nextQuestion()">Male</button>
+              <button class="q-btn" onclick="selectQ('gender','female', this); nextQuestion()">Female</button>
+              <button class="q-btn" onclick="selectQ('gender','other', this); nextQuestion()">Other</button>
+            </div>
+          </div>
+          <!-- Female-only: Hormone imbalance -->
+          <div id="q-hormone" class="q-block">
+            <h3>Do you have hormone imbalance?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('hormone','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('hormone','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <!-- Female-only: PCOS -->
+          <div id="q-pcos" class="q-block">
+            <h3>Do you have PCOS?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('pcos','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('pcos','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <!-- Female-only: PCOD -->
+          <div id="q-pcod" class="q-block">
+            <h3>Do you have PCOD?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('pcod','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('pcod','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <!-- Female-only: Period issues -->
+          <div id="q-period" class="q-block">
+            <h3>Any period-related issues?</h3>
+            <div class="q-buttons">
+              <button class="q-btn" onclick="selectQ('period','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('period','no', this); nextQuestion()">No</button>
+            </div>
+          </div>
+          <!-- Skin type -->
+          <div id="q-skintype" class="q-block">
             <h3>What's your skin type?</h3>
             <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('skintype','oily', this); nextQuestion()">Oily</button>
@@ -81,7 +123,8 @@
               <button class="q-btn" onclick="selectQ('skintype','other', this); nextQuestion()">Other</button>
             </div>
           </div>
-          <div id="q2" class="q-block">
+          <!-- Alcohol -->
+          <div id="q-alcohol" class="q-block">
             <h3>Do you drink alcohol?</h3>
             <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('alcohol','yes', this); nextQuestion()">Yes</button>
@@ -89,14 +132,17 @@
               <button class="q-btn" onclick="selectQ('alcohol','no', this); nextQuestion()">No</button>
             </div>
           </div>
-          <div id="q3" class="q-block">
+          <!-- Smoking -->
+          <div id="q-smoking" class="q-block">
             <h3>Do you smoke?</h3>
-            <div class="q-buttons">
+            <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('smoking','yes', this); nextQuestion()">Yes</button>
+              <button class="q-btn" onclick="selectQ('smoking','occasionally', this); nextQuestion()">Occasionally</button>
               <button class="q-btn" onclick="selectQ('smoking','no', this); nextQuestion()">No</button>
             </div>
           </div>
-          <div id="q4" class="q-block">
+          <!-- Diet -->
+          <div id="q-diet" class="q-block">
             <h3>What's your diet?</h3>
             <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('diet','vegetarian', this); nextQuestion()">Vegetarian</button>
@@ -104,7 +150,8 @@
               <button class="q-btn" onclick="selectQ('diet','vegan', this); nextQuestion()">Vegan</button>
             </div>
           </div>
-          <div id="q5" class="q-block">
+          <!-- Water -->
+          <div id="q-water" class="q-block">
             <h3>Water drinking habits (daily)?</h3>
             <div class="q-buttons q-buttons-3">
               <button class="q-btn" onclick="selectQ('water','1-3', this); finishQuestionnaire()">1-3 liters</button>
